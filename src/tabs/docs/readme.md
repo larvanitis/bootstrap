@@ -38,3 +38,7 @@ AngularJS version of the tabs directive.
  * `deselect()`
  	_(Defaults: null)_ :
  	An optional expression called when tab is deactivated.
+
+ * `before-select()`
+ 	_(Defaults: null)_ :
+ 	An optional expression called before the tab is activated. The `ng-click` [event object is available as `$event`](https://docs.angularjs.org/guide/expression#-event-) so that you can use `$event.preventDefault()` to prevent the tab switch.

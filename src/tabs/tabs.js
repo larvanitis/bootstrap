@@ -192,6 +192,7 @@ angular.module('ui.bootstrap.tabs', [])
     scope: {
       active: '=?',
       heading: '@',
+      beforeSelect: '&', //Called before tab switch and can prevent it
       onSelect: '&select', //This callback is called in contentHeadingTransclude
                           //once it inserts the tab's content into the dom
       onDeselect: '&deselect'
@@ -225,8 +226,12 @@ angular.module('ui.bootstrap.tabs', [])
           });
         }
 
-        scope.select = function() {
+        scope.select = function($event) {
           if ( !scope.disabled ) {
+            scope.beforeSelect({$event: $event});
+            if ($event.isDefaultPrevented()) {
+              return;
+            }
             scope.active = true;
           }
         };
